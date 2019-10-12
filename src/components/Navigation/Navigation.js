@@ -36,7 +36,7 @@ export default class Navigation extends Component {
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <a className="nav-link" href="/registrarse">
                   <i className="fas fa-user-plus"></i> Registrarse
                 </a>
               </li>
