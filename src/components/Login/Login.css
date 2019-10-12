@@ -1,0 +1,31 @@
+.title-login {
+    font-weight: 900 !important;
+}
+
+.badge-residenciapp-green {
+    color: #fff;
+    background-color: #59bd8b;
+}
+
+.btn-residenciapp-green {
+    color: #fff;
+    background-color: #003e71;
+    border-color: #003e71;
+}
+
+.btn-residenciapp-green:hover {
+    color: #fff;
+    background-color: #085ca0;
+    border-color: #085ca0;
+}
+
+.badge {
+    font-size: 85% !important;
+}
+
+/*Bootstrap 4 Override*/
+.card-header {
+    background-color: #003e71 !important;
+    color: #FFFFFF !important;
+}
+
