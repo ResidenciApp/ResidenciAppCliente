@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import NavCss from './Navigation.css';
-import logo from '../ResidenciApp.png';
+import './Navigation.css';
+import logo from '../../ResidenciApp.png';
 
 export default class Navigation extends Component {
   render() {
@@ -26,18 +26,18 @@ export default class Navigation extends Component {
         
             <ul className="navbar-nav mr-auto">
               <li className="nav-item">
-                <a className="nav-link" href="#">
-                  <i class="fas fa-home"></i> Home
+                <a className="nav-link" href="/">
+                  <i className="fas fa-home"></i> Home
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
-                  <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
+                <a className="nav-link" href="/login">
+                  <i className="fas fa-sign-in-alt"></i> Iniciar Sesión
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
-                  <i class="fas fa-user-plus"></i> Registrarse
+                <a className="nav-link" href="/registrarse">
+                  <i className="fas fa-user-plus"></i> Registrarse
                 </a>
               </li>
             </ul>
