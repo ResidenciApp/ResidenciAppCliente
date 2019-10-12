@@ -1,0 +1,30 @@
+/*Estilos de la barra de Navegancion*/
+.nav-height {
+    line-height: 10px !important;
+}
+
+/*Fondo del Logo*/
+.logo-background {
+    background-color: #003e71;
+}
+
+/*Dimensiones del Logo*/
+.logo-img {
+    width: 250px;
+    height: 54.68px;
+}
+
+
+/*BOOTSTRAP 4 OVERRIDE*/
+.navbar-nav .nav-item:hover {
+    background-color: #59bd8b;
+    border-radius: 5px;
+}
+
+.navbar-nav .nav-item a:hover {
+    color: #000000 !important;
+}
+
+.nav-link {
+    color: #ffffff !important;
+}
