@@ -1,11 +1,14 @@
+/*Estilos de la barra de Navegancion*/
 .nav-height {
     line-height: 10px !important;
 }
 
+/*Fondo del Logo*/
 .logo-background {
     background-color: #003e71;
 }
 
+/*Dimensiones del Logo*/
 .logo-img {
     width: 250px;
     height: 54.68px;
