@@ -80,7 +80,7 @@ export default class CheckInOwner extends Component {
                   <div className="input-group mb-3">
                     <div className="input-group-prepend">
                       <label className="input-group-text">
-                        <i class="fas fa-file"></i>
+                        <i className="fas fa-file"></i>
                       </label>
                     </div>
                     <select className="custom-select" id="document-type">
@@ -96,7 +96,7 @@ export default class CheckInOwner extends Component {
                   <div className="input-group mb-3">
                     <div className="input-group-prepend">
                       <span className="input-group-text" id="id-number">
-                        <i class="fas fa-passport"></i>
+                        <i className="fas fa-passport"></i>
                       </span>
                     </div>
                     <input type="number" className="form-control" aria-label="Default" aria-describedby="id-number" placeholder="Ingrese su Numero de Documento"/>

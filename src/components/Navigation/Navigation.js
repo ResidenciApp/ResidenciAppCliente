@@ -42,7 +42,7 @@ export default class Navigation extends Component {
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="/registrar-propietario">
-                  <i class="fas fa-building"></i> Registrar Propietario
+                  <i className="fas fa-building"></i> Registrar Propietario
                 </a>
               </li>
             </ul>
