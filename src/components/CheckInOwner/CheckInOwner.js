@@ -1,47 +1,22 @@
 import React, { Component } from 'react';
 
-import './CheckIn.css';
+import './CheckInOwner.css';
 
-export default class CheckIn extends Component {
+export default class CheckInOwner extends Component {
   render() {
     return (
-      <div className="container checkin">
+      <div className="container checkin-owner">
         <div className="row">
           <div className="col-md-6 mx-auto">
             <br/>
 
             <div className="card">
               <div className="card-header">
-                <h3 className="text-center title-login">Registrar <span className="badge badge-residenciapp-green">Usuario</span></h3>
+                <h3 className="text-center title-login">Registrar <span className="badge badge-residenciapp-green">Propietario</span></h3>
               </div>
               <div className="card-body">
 
-                <div class="btn-group btn-group-lg d-flex justify-content-center" role="group" aria-label="Basic example">
-                  <button type="button" class="btn btn-social btn-facebook">
-                    <i class="fab fa-facebook-square"></i>
-                  </button>
-                  <button type="button" class="btn btn-social btn-facebook btn-lg btn-block">
-                    Registrarse con Facebook
-                  </button>
-                </div>
-                
-                <hr />
-
-                <div class="btn-group btn-group-lg d-flex justify-content-center" role="group" aria-label="Basic example">
-                  <button type="button" class="btn btn-social btn-google">
-                    <i class="fab fa-google"></i>
-                  </button>
-                  <button type="button" class="btn btn-social btn-google btn-lg btn-block">
-                    Registrarse con Google
-                  </button>
-                </div>
-
-                <hr />
-
-                <h5 className="text-center">O Ingresando sus datos</h5>
-
                 <form>
-
                   <div className="input-group mb-3">
                     <div className="input-group-prepend">
                       <span className="input-group-text" id="name">
@@ -99,6 +74,34 @@ export default class CheckIn extends Component {
                     <input type="email" className="form-control" aria-label="Default" aria-describedby="email" placeholder="Ingrese su Correo" />
                     <div className="input-group-prepend">
                       <span className="input-group-text">Correo</span>
+                    </div>
+                  </div>
+
+                  <div className="input-group mb-3">
+                    <div className="input-group-prepend">
+                      <label className="input-group-text">
+                        <i class="fas fa-file"></i>
+                      </label>
+                    </div>
+                    <select className="custom-select" id="document-type">
+                      <option defaultValue="N">Elegir Tipo de Documento...</option>
+                      <option value="CC">Cedula de Ciudadania</option>
+                      <option value="TI">Tarjeta de Identidad</option>
+                    </select>
+                    <div className="input-group-prepend">
+                      <label className="input-group-text" htmlFor="document-type">Tipo de Doc</label>
+                    </div>
+                  </div>
+
+                  <div className="input-group mb-3">
+                    <div className="input-group-prepend">
+                      <span className="input-group-text" id="id-number">
+                        <i class="fas fa-passport"></i>
+                      </span>
+                    </div>
+                    <input type="number" className="form-control" aria-label="Default" aria-describedby="id-number" placeholder="Ingrese su Numero de Documento"/>
+                    <div className="input-group-prepend">
+                      <span className="input-group-text">N° de Documento</span>
                     </div>
                   </div>
 
