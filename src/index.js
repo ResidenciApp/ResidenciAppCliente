@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import App from './App';
 import LoginView from './views/LoginView/LoginView';
 import CheckInView from './views/CheckInView/CheckInView';
+import CheckInOwnerView from './views/CheckInOwnerView/CheckInOwnerView';
 
 import './index.css';
 
@@ -15,6 +16,7 @@ const Application = () =>  (
       <Route exact path="/" component={App} />
       <Route exact path="/login" component={LoginView} />
       <Route exact path="/registrarse" component={CheckInView} />
+      <Route exact path="/registrar-propietario" component={CheckInOwnerView} />
     </React.Fragment>
   </BrowserRouter>
 );

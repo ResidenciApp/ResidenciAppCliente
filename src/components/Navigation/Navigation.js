@@ -40,6 +40,11 @@ export default class Navigation extends Component {
                   <i className="fas fa-user-plus"></i> Registrarse
                 </a>
               </li>
+              <li className="nav-item">
+                <a className="nav-link" href="/registrar-propietario">
+                  <i className="fas fa-building"></i> Registrar Propietario
+                </a>
+              </li>
             </ul>
           </div>
         
