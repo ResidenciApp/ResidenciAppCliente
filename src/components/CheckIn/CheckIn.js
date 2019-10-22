@@ -58,9 +58,13 @@ export default class CheckIn extends Component {
       age,
       username,
       password,
+      passwordAgain,
       email,
       sex
     } = this.state;
+
+    // TODO: Verificar que contraseñas sean correctas
+    // password == passwordAgain
 
     await axios.post(url, {
       name: name,

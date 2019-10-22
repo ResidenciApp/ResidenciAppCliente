@@ -1,8 +1,104 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+
+import config from '../../config';
 
 import './CheckInOwner.css';
 
 export default class CheckInOwner extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      name: "",
+      lastname: "",
+      age: 0,
+      username: "",
+      email: "",
+      documentType: "", // Tipo de Documentos: CC. TI
+      idNumber: "",    // Numero de Identificación
+      sex: "",
+      password: "",
+      passwordAgain: ""
+    }
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
+  }
+
+  async handleSubmit(event) {
+    event.preventDefault();
+
+    console.log(this.state);
+
+    var path = '/api/v1/users/people/';
+    var url = config.urlServer + path;
+
+
+    // TODO: hacer el avatar dinamicamente con el correo
+    var avatar = 'https://secure.gravatar.com/avatar/767fc9c115a1b989744c755db47feb60?size=100';
+    // TODO: implementar token
+
+    var token = 'token-key';
+
+    var data = undefined;
+
+    // CORS Configuration
+    axios.defaults.withCredentials = true;
+    axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+    axios.defaults.xsrfCookieName = "csrftoken";
+
+    var {
+      name,
+      lastname,
+      age,
+      username,
+      password,
+      passwordAgain,
+      email,
+      documentType,
+      idNumber, 
+      sex
+    } = this.state;
+
+    // TODO: Verificar que contraseñas sean correctas
+    // password == passwordAgain
+
+    await axios.post(url, {
+      name: name,
+      lastName: lastname,
+      age: age,
+      nickname: username,
+      password: password,
+      avatar: avatar,
+      mail: email,
+      token: token,
+      role: 3, // Role 3 ==> Propietario
+      sex: sex,
+      documentNumber: idNumber,
+      documentType: documentType
+    }).then((response) => {
+      data = response.data;
+      console.log(data);
+      if(data.status === 201) {
+        alert('Se registro correctamente');
+      } else {
+        alert('No se registro correctamente');
+      }
+      
+    })
+
+    // this.props.history.push('/');
+  }
+
+
   render() {
     return (
       <div className="container checkin-owner">
@@ -16,14 +112,26 @@ export default class CheckInOwner extends Component {
               </div>
               <div className="card-body">
 
-                <form>
+                <form onSubmit={this.handleSubmit} role="form" id="form" method="POST">
                   <div className="input-group mb-3">
                     <div className="input-group-prepend">
                       <span className="input-group-text" id="name">
                         <i className="fas fa-address-card"></i>
                       </span>
                     </div>
-                    <input type="text" className="form-control" aria-label="Default" aria-describedby="name" placeholder="Ingrese su Nombre" />
+
+                    <input
+                      type="text"
+                      className="form-control"
+                      aria-label="Default"
+                      aria-describedby="name"
+                      placeholder="Ingrese su Nombre"
+                      name="name"
+                      value={this.state.name}
+                      onChange={this.handleChange}
+                      required
+                    />
+                    
                     <div className="input-group-prepend">
                       <span className="input-group-text">Nombre</span>
                     </div>
@@ -35,7 +143,19 @@ export default class CheckInOwner extends Component {
                         <i className="fas fa-fingerprint"></i>
                       </span>
                     </div>
-                    <input type="text" className="form-control" aria-label="Default" aria-describedby="lastname" placeholder="Ingrese su Apellido" />
+
+                    <input
+                      type="text"
+                      className="form-control"
+                      aria-label="Default"
+                      aria-describedby="lastname"
+                      placeholder="Ingrese su Apellido"
+                      name="lastname"
+                      value={this.state.lastname}
+                      onChange={this.handleChange}
+                      required
+                    />
+
                     <div className="input-group-prepend">
                       <span className="input-group-text">Apellido</span>
                     </div>
@@ -47,7 +167,19 @@ export default class CheckInOwner extends Component {
                         <i className="fas fa-sort-numeric-up"></i>
                       </span>
                     </div>
-                    <input type="number" className="form-control" aria-label="Default" aria-describedby="age" placeholder="Ingrese su Edad"/>
+
+                    <input
+                      type="number"
+                      className="form-control"
+                      aria-label="Default"
+                      aria-describedby="age"
+                      placeholder="Ingrese su Edad"
+                      name="age"
+                      value={this.state.age}
+                      onChange={this.handleChange}
+                      required
+                    />
+
                     <div className="input-group-prepend">
                       <span className="input-group-text">Edad</span>
                     </div>
@@ -59,7 +191,19 @@ export default class CheckInOwner extends Component {
                         <i className="fas fa-user"></i>
                       </span>
                     </div>
-                    <input type="text" className="form-control" aria-label="Default" aria-describedby="username" placeholder="Ingrese su Nombre de Usuario" />
+
+                    <input
+                      type="text"
+                      className="form-control"
+                      aria-label="Default"
+                      aria-describedby="username"
+                      placeholder="Ingrese su Nombre de Usuario"
+                      name="username"
+                      value={this.state.username}
+                      onChange={this.handleChange}
+                      required
+                    />
+
                     <div className="input-group-prepend">
                       <span className="input-group-text">Username</span>
                     </div>
@@ -71,7 +215,19 @@ export default class CheckInOwner extends Component {
                         <i className="fas fa-envelope"></i>
                       </span>
                     </div>
-                    <input type="email" className="form-control" aria-label="Default" aria-describedby="email" placeholder="Ingrese su Correo" />
+
+                    <input
+                      type="email"
+                      className="form-control"
+                      aria-label="Default"
+                      aria-describedby="email"
+                      placeholder="Ingrese su Correo"
+                      name="email"
+                      value={this.state.email}
+                      onChange={this.handleChange}
+                      required
+                    />
+
                     <div className="input-group-prepend">
                       <span className="input-group-text">Correo</span>
                     </div>
@@ -83,11 +239,21 @@ export default class CheckInOwner extends Component {
                         <i className="fas fa-file"></i>
                       </label>
                     </div>
-                    <select className="custom-select" id="document-type">
+
+                    <select
+                      className="custom-select"
+                      id="documentType"
+                      name="documentType"
+                      value={this.state.documentType}
+                      onChange={this.handleChange}
+                      required
+                      >
+
                       <option defaultValue="N">Elegir Tipo de Documento...</option>
                       <option value="CC">Cedula de Ciudadania</option>
                       <option value="TI">Tarjeta de Identidad</option>
                     </select>
+
                     <div className="input-group-prepend">
                       <label className="input-group-text" htmlFor="document-type">Tipo de Doc</label>
                     </div>
@@ -99,7 +265,19 @@ export default class CheckInOwner extends Component {
                         <i className="fas fa-passport"></i>
                       </span>
                     </div>
-                    <input type="number" className="form-control" aria-label="Default" aria-describedby="id-number" placeholder="Ingrese su Numero de Documento"/>
+
+                    <input
+                      type="number"
+                      className="form-control"
+                      aria-label="Default"
+                      aria-describedby="id-number"
+                      placeholder="Ingrese su Numero de Documento"
+                      name="idNumber"
+                      value={this.state.idNumber}
+                      onChange={this.handleChange}
+                      required
+                    />
+
                     <div className="input-group-prepend">
                       <span className="input-group-text">N° de Documento</span>
                     </div>
@@ -111,7 +289,16 @@ export default class CheckInOwner extends Component {
                       <i className="fas fa-users"></i>
                       </label>
                     </div>
-                    <select className="custom-select" id="sex">
+
+                    <select
+                      className="custom-select"
+                      id="sex"
+                      name="sex"
+                      value={this.state.sex}
+                      onChange={this.handleChange}
+                      required
+                      >
+
                       <option defaultValue="N">Elegir Sexo...</option>
                       <option value="F">Femenino</option>
                       <option value="M">Masculino</option>
@@ -128,7 +315,19 @@ export default class CheckInOwner extends Component {
                         <i className="fas fa-unlock"></i>
                       </span>
                     </div>
-                    <input type="password" className="form-control" aria-label="Default" aria-describedby="password" placeholder="Ingrese su Contraseña" />
+
+                    <input
+                      type="password"
+                      className="form-control"
+                      aria-label="Default"
+                      aria-describedby="password"
+                      placeholder="Ingrese su Contraseña"
+                      name="password"
+                      value={this.state.password}
+                      onChange={this.handleChange}
+                      required
+                    />
+
                     <div className="input-group-prepend">
                       <span className="input-group-text">Contraseña</span>
                     </div>
@@ -136,11 +335,23 @@ export default class CheckInOwner extends Component {
 
                   <div className="input-group mb-3">
                     <div className="input-group-prepend">
-                      <span className="input-group-text" id="password-again">
+                      <span className="input-group-text" id="passwordAgain">
                         <i className="fas fa-lock"></i>
                       </span>
                     </div>
-                    <input type="text" className="form-control" aria-label="Default" aria-describedby="password-again" placeholder="Confirme su Contraseña" />
+
+                    <input
+                      type="password"
+                      className="form-control"
+                      aria-label="Default"
+                      aria-describedby="passwordAgain"
+                      placeholder="Confirme su Contraseña"
+                      name="passwordAgain"
+                      value={this.state.passwordAgain}
+                      onChange={this.handleChange}
+                      required
+                    />
+
                     <div className="input-group-prepend">
                       <span className="input-group-text">Repetir Contraseña</span>
                     </div>
