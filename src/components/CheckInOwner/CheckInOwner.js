@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import {withRouter} from 'react-router-dom';
 import axios from 'axios';
 
 import config from '../../config';
 
 import './CheckInOwner.css';
 
-export default class CheckInOwner extends Component {
+class CheckInOwner extends Component {
 
   constructor(props) {
     super(props);
@@ -25,6 +26,7 @@ export default class CheckInOwner extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.checkStatus  = this.checkStatus.bind(this);
   }
 
   handleChange(event) {
@@ -87,15 +89,19 @@ export default class CheckInOwner extends Component {
     }).then((response) => {
       data = response.data;
       console.log(data);
-      if(data.status === 201) {
-        alert('Se registro correctamente');
-      } else {
-        alert('No se registro correctamente');
-      }
-      
+      this.checkStatus(data);
     })
+  }
 
-    // this.props.history.push('/');
+  checkStatus(data) {
+    if(data.status === 201 && data.message === "OK") {
+      alert('Se registro correctamente');
+      return this.props.history.push('/');
+    }
+
+    if(data.status === 400 && data.message === "USERNAME_ALREADY_EXISTS") {
+      alert('Nombre de Usuario ya Existe');
+    }
   }
 
 
@@ -376,3 +382,5 @@ export default class CheckInOwner extends Component {
     )
   }
 }
+
+export default withRouter(CheckInOwner);

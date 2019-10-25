@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import {withRouter} from 'react-router-dom';
 import axios from 'axios';
 
 import config from '../../config';
 
 import './CheckIn.css';
 
-export default class CheckIn extends Component {
+class CheckIn extends Component {
 
   constructor(props) {
     super(props);
@@ -20,9 +21,11 @@ export default class CheckIn extends Component {
       password: "",
       passwordAgain: ""
     }
-
+    
+    this.checkStatus  = this.checkStatus.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    
   }
 
   handleChange(event) {
@@ -80,9 +83,21 @@ export default class CheckIn extends Component {
     }).then((response) => {
       data = response.data;
       console.log(data);
+
+      this.checkStatus(data);
     })
 
-    // this.props.history.push('/');
+  }
+
+  checkStatus(data) {
+    if(data.status === 201 && data.message === "OK") {
+      alert('Se registro correctamente');
+      return this.props.history.push('/');
+    }
+
+    if(data.status === 400 && data.message === "USERNAME_ALREADY_EXISTS") {
+      alert('Nombre de Usuario ya Existe');
+    }
   }
 
   render() {
@@ -338,3 +353,5 @@ export default class CheckIn extends Component {
     )
   }
 }
+
+export default withRouter(CheckIn);
