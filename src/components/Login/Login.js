@@ -70,7 +70,7 @@ class Login extends Component {
       alert('Nombre de Usuario o Contraseña Incorrecta')
     }
 
-    if(data.status === 201 && data.message === 'OK') {
+    if(data.status === 200 && data.message === 'OK') {
       localStorage.removeItem('TOKEN');
       localStorage.setItem('TOKEN', data.Token);
       this.props.history.push('/')
