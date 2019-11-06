@@ -182,6 +182,7 @@ class Navigation extends Component {
         path: '/registrar-propietario',
         icon: 'fas fa-building'
       });
+      
     }
 
     return (
