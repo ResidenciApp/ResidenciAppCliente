@@ -15,12 +15,14 @@ class Navigation extends Component {
     super(props);
 
     this.state = {
-      isLogged: false
+      isLogged: false,
+      username: ''
     };
 
     this.componentDidMount = this.componentDidMount.bind(this);
     this.handleLogOut = this.handleLogOut.bind(this);
     this.checkStatus = this.checkStatus.bind(this);
+    this.updateUserName = this.updateUserName.bind(this);
   }
 
   componentDidMount() {
@@ -33,6 +35,7 @@ class Navigation extends Component {
         isLogged: true
       })
 
+      this.updateUserName();
     } else {
       // En caso contrario significa que el Usuario no ha iniciado sesión
       // Por tanto dejamos el stado 'isLogged' en false
@@ -98,10 +101,48 @@ class Navigation extends Component {
     }
   }
 
+  async updateUserName() {
+
+    // Obtener Token del LocalStorage
+    var token = localStorage.getItem('TOKEN');
+
+    var path = '/api/v1/users/token-role/';
+    var url = config.urlServer + path;
+
+    // Hace una consulta POST: /api/v1/users/token-role/
+    // Que trae el 'role' y el 'username' del usuario
+
+    await axios.post(url, {
+      headers: {
+        Authorization: `Token ${token}`
+      } 
+    })
+    .then(response => {
+      var data = response.data;
+      
+      // Verificar que la consulta tenga una respuesta positiva
+      if(data.status===200 && data.message==='OK') {
+        // Actualizar el estado 'username'
+        this.setState({
+          username: data.username
+        })
+      }
+
+    })
+    .catch(error => {
+      alert('Ocurrio un Error');
+      console.log(error);
+    });
+
+  }
+
   render() {
     var elements = [];
 
+    // Verificar si el usuario esta Logueado
     if(this.state.isLogged) {
+      // En caso de que esté Logueado, Muestra los siguientes Items
+      // En la barra de Navegación
 
       elements.push({
         name: 'Home',
@@ -116,6 +157,8 @@ class Navigation extends Component {
       })
     } else {
 
+      // En caso de que el usuario no este Logueado
+      // Muestra los siguientes Items
       elements.push({
         name: 'Home',
         path: '/',
@@ -181,7 +224,7 @@ class Navigation extends Component {
                 <ul className="navbar-nav">
                   <li className="nav-item dropdown">
                     <a className="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                      <span className="fas fa-user-friends"></span> username
+                      <span className="fas fa-user-friends"></span> {this.state.username}
                     </a>
                     <div className="dropdown-menu">
                       <a className="dropdown-item" href="#">Perfil</a>
