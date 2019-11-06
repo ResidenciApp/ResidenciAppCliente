@@ -1,0 +1,66 @@
+.title-login {
+    font-weight: 900 !important;
+}
+
+.badge-residenciapp-green {
+    color: #ffffff;
+    background-color: #59bd8b;
+}
+
+.btn-residenciapp-green {
+    color: #fff;
+    background-color: #003e71;
+    border-color: #003e71;
+}
+
+.btn-residenciapp-green:hover {
+    color: #fff;
+    background-color: #085ca0;
+    border-color: #085ca0;
+}
+
+.badge {
+    font-size: 85% !important;
+}
+
+/*Bootstrap 4 Override*/
+.card-header {
+    background-color: #003e71 !important;
+    color: #FFFFFF !important;
+}
+
+hr {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.btn-facebook {
+    color: #fff;
+    background-color: #3b5998;
+    border-color: #3b5998;
+}
+
+.btn-facebook:hover {
+    color: #003e71 !important;
+}
+
+.btn-google {
+    color: #fff;
+    background-color: #dd4b39;
+    border-color: #dd4b39;
+}
+
+.btn-google:hover {
+    color: #ab0000 !important;
+}
+
+.btn-social {
+    padding: 1px 6px !important;
+    padding-top: 1px !important;
+    padding-right: 6px !important;
+    padding-bottom: 1px !important;
+    padding-left: 6px !important;
+}
+
