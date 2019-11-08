@@ -7,6 +7,7 @@ import App from './App';
 import LoginView from './views/LoginView/LoginView';
 import CheckInView from './views/CheckInView/CheckInView';
 import CheckInOwnerView from './views/CheckInOwnerView/CheckInOwnerView';
+import CreateStudentHousingView from './views/CreateStudentHousingView/CreateStudentHousingView'
 
 import NotFound404 from './components/NotFound404/NotFound404';
 
@@ -30,6 +31,7 @@ const Application = () =>  (
         <Route exact path="/login" component={LoginViewPermission} />
         <Route exact path="/registrarse" component={CheckInViewPermission} />
         <Route exact path="/registrar-propietario" component={CheckInOwnerViewPermission} />
+        <Route exact path="/registrar-residencia" component={CreateStudentHousingView} />
         <Route component={NotFound404} />
       </Switch>
     </React.Fragment>
