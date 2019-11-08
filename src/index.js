@@ -23,6 +23,11 @@ var CheckInOwnerViewPermission =  PermissionByRole(CheckInOwnerView, [roles.NOT_
 var CheckInViewPermission = PermissionByRole(CheckInView, [roles.NOT_AUTHENTICATED]);
 var LoginViewPermission = PermissionByRole(LoginView, [roles.NOT_AUTHENTICATED]);
 
+// Solo puedo acceder a estos componente si el usuario tiene el role de 'Propietario'
+var CreateSHViewPermission = PermissionByRole(CreateStudentHousingView,
+  [roles.OWNER]
+);
+
 const Application = () =>  (
   <BrowserRouter>
     <React.Fragment>
@@ -31,7 +36,7 @@ const Application = () =>  (
         <Route exact path="/login" component={LoginViewPermission} />
         <Route exact path="/registrarse" component={CheckInViewPermission} />
         <Route exact path="/registrar-propietario" component={CheckInOwnerViewPermission} />
-        <Route exact path="/registrar-residencia" component={CreateStudentHousingView} />
+        <Route exact path="/registrar-residencia" component={CreateSHViewPermission} />
         <Route component={NotFound404} />
       </Switch>
     </React.Fragment>

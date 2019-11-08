@@ -45,7 +45,7 @@ class Facebook extends Component {
         email: response.email,
         avatar: response.picture.data.url,
         sex: 'O',
-        password: ""
+        password: 'password'
     })
 
 
@@ -91,7 +91,45 @@ class Facebook extends Component {
     })
 
     if(data.status === 400 && data.message === "USERNAME_ALREADY_EXISTS") {
-        alert('Ya tiene una cuenta registrada, por favor inicie sesion');
+        // alert('Ya tiene una cuenta registrada, por favor inicie sesion');
+    }
+
+    // Iniciar Sesion
+    path = '/api/v1/users/api-token-auth/';
+
+    url = config.urlServer + path;
+
+    var {
+      username,
+      password
+    } = this.state;
+
+    data = await axios.post(url, {
+      username: username,
+      password: password
+    })
+    .then(response => {
+      data = response.data;
+      console.log(data);
+
+      return data;
+    })
+    .catch(error => {
+      alert('Ocurrio un Error');
+    });
+
+    if(data.status === 400 && data.message === 'INCORRECT_PASSWORD_OR_USERNAME') {
+        alert('Nombre de Usuario o Contraseña Incorrecta')
+    }
+
+    if(data.status === 400 && data.message === 'USERNAME_OR_PASSWORD_IS_NONE') {
+        alert('Nombre de Usuario o Contraseña Incorrecta')
+    }
+
+    if(data.status === 200 && data.message === 'OK') {
+        localStorage.removeItem('TOKEN');
+        localStorage.setItem('TOKEN', data.Token);
+        this.props.history.push('/')
     }
 
   }

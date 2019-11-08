@@ -8,6 +8,8 @@ import config from '../../config';
 
 import './Login.css';
 
+import Facebook from '../Authentication/Facebook'
+
 class Login extends Component {
 
   constructor(props) {
@@ -90,8 +92,14 @@ class Login extends Component {
                 <h3 className="text-center title-login">Iniciar <span className="badge badge-residenciapp-green">Sesión</span></h3>
               </div>
               <div className="card-body">
+
+                <Facebook />
+                
+                <hr />
+
                 <form onSubmit={this.handleSubmit} role="form" id="form" method="POST">
                   <div className="form-group">
+
                     <label htmlFor="username">Nombre de Usuario</label>
 
                     <input
