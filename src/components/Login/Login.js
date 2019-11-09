@@ -9,6 +9,7 @@ import config from '../../config';
 import './Login.css';
 
 import Facebook from '../Authentication/Facebook'
+import Google from '../Authentication/Google'
 
 class Login extends Component {
 
@@ -94,6 +95,11 @@ class Login extends Component {
               <div className="card-body">
 
                 <Facebook />
+                <div className="row justify-content-center">
+                  <div className="col-9">
+                    <Google />
+                  </div>
+                </div>
                 
                 <hr />
 
