@@ -154,6 +154,11 @@ class Navigation extends Component {
         name: 'Buscar Residencia',
         path: '#',
         icon: 'fas fa-search-location'
+      });
+      elements.push({
+        name: 'Perfil propietario',
+        path: '/perfil-propietario',
+        icon: 'fas fa-id-badge'
       })
     } else {
 

@@ -6,7 +6,8 @@ import config from '../../config';
 
 import './CreateStudentHousing.css';
 
-class CheckIn extends Component {
+
+class CreateStudentHousing extends Component {
 
   constructor(props) {
     super(props);
@@ -364,4 +365,4 @@ class CheckIn extends Component {
   }
 }
 
-export default withRouter(CheckIn);
+export default withRouter(CreateStudentHousing);
