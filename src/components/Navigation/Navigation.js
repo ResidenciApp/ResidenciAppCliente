@@ -16,7 +16,8 @@ class Navigation extends Component {
 
     this.state = {
       isLogged: false,
-      username: ''
+      username: '',
+      role: ''
     };
 
     this.componentDidMount = this.componentDidMount.bind(this);
@@ -119,12 +120,15 @@ class Navigation extends Component {
     })
     .then(response => {
       var data = response.data;
+
+      console.log(data)
       
       // Verificar que la consulta tenga una respuesta positiva
       if(data.status===200 && data.message==='OK') {
         // Actualizar el estado 'username'
         this.setState({
-          username: data.username
+          username: data.username,
+          role: data.role_name
         })
       }
 
@@ -160,6 +164,21 @@ class Navigation extends Component {
         path: '/perfil-propietario',
         icon: 'fas fa-id-badge'
       })
+
+      if (this.state.role === 'Usuario') {
+        // Rutas que solo puede acceder el Usuario
+      } else if(this.state.role === 'Propietario') {
+        // Rutas que solo puede acceder el Propietario
+        elements.push({
+          name: 'Registrar Residencia',
+          path: '/registrar-residencia',
+          icon: 'fas fa-plus'
+        })
+      } else if (this.state.role === 'Administrador') {
+        // Rutas que solo puede acceder el Administrador
+      }
+
+      
     } else {
 
       // En caso de que el usuario no este Logueado

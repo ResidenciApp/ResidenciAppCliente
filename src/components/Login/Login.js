@@ -8,6 +8,9 @@ import config from '../../config';
 
 import './Login.css';
 
+import Facebook from '../Authentication/Facebook'
+import Google from '../Authentication/Google'
+
 class Login extends Component {
 
   constructor(props) {
@@ -90,8 +93,19 @@ class Login extends Component {
                 <h3 className="text-center title-login">Iniciar <span className="badge badge-residenciapp-green">Sesión</span></h3>
               </div>
               <div className="card-body">
+
+                <Facebook />
+                <div className="row justify-content-center">
+                  <div className="col-9">
+                    <Google />
+                  </div>
+                </div>
+                
+                <hr />
+
                 <form onSubmit={this.handleSubmit} role="form" id="form" method="POST">
                   <div className="form-group">
+
                     <label htmlFor="username">Nombre de Usuario</label>
 
                     <input
