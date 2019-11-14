@@ -11,6 +11,9 @@ class OwnerProfile extends Component {
 
     constructor(props) {
        super(props);
+
+        let { username } = this.props.match.params;
+        console.log(username)
     }    
       
   
