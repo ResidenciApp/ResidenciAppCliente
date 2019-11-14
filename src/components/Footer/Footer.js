@@ -9,10 +9,10 @@ export default class Footer extends Component {
         <div class="container">
 
 
-<div class="row">
+<div class="row justify-content-center">
 
   
-  <div class="col-md-12 py-5">
+  <div class="col-md-5 py-5">
     <div class="mb-5 flex-center">
 
       
@@ -48,7 +48,8 @@ export default class Footer extends Component {
 </div>
 
 <div class="footer-copyright text-center py-3">
-<a href=""> ...</a>
+<h5>De LATAM con <span class="badge badge-secondary love"><i class="fas fa-heart"></i></span> para el mundo</h5>
+<a className="badge badge-light badge-residenciapp" href="residenciapp.herokuapp.com">residenciapp.com</a>
 </div>
 
       </div>

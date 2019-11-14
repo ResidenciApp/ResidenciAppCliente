@@ -18,17 +18,18 @@ import PermissionByRole from './Permission';
 import config from './config';
 
 
-const roles = config.permissionRole;
+const roles = config.permission;
+
 
 // Solo puedo acceder a estos componente si el usuario no esta autenticado
-var AppViewPermission =  PermissionByRole(App, [roles.NOT_AUTHENTICATED]);
-var CheckInOwnerViewPermission =  PermissionByRole(CheckInOwnerView, [roles.NOT_AUTHENTICATED]);
-var CheckInViewPermission = PermissionByRole(CheckInView, [roles.NOT_AUTHENTICATED]);
-var LoginViewPermission = PermissionByRole(LoginView, [roles.NOT_AUTHENTICATED]);
-var OwnerProfileViewPermission = PermissionByRole(OwnerProfileView, [roles.NOT_AUTHENTICATED]);
+var AppViewPermission =  PermissionByRole(App                      , roles.ANY_USER);
+var CheckInOwnerViewPermission =  PermissionByRole(CheckInOwnerView, roles.ANY_USER);
+var CheckInViewPermission = PermissionByRole(CheckInView           , roles.ANY_USER);
+var LoginViewPermission = PermissionByRole(LoginView               , roles.ANY_USER);
+var OwnerProfileViewPermission = PermissionByRole(OwnerProfileView , roles.ANY_USER);
 
 // Solo puedo acceder a estos componente si el usuario tiene el role de 'Propietario'
-var CreateSHViewPermission = PermissionByRole(CreateStudentHousingView,[roles.OWNER]);
+var CreateSHViewPermission = PermissionByRole(CreateStudentHousingView, roles.ONLY_OWNER);
 
 const Application = () =>  (
   <BrowserRouter>
