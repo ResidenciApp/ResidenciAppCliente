@@ -7,6 +7,7 @@ import config from '../../config';
 import './CheckIn.css';
 
 import Facebook from '../Authentication/Facebook'
+import Google from '../Authentication/Google';
 
 class CheckIn extends Component {
 
@@ -116,17 +117,13 @@ class CheckIn extends Component {
               <div className="card-body">
 
                 <Facebook />
-                
                 <hr />
-
-                <div className="btn-group btn-group-lg d-flex justify-content-center" role="group" aria-label="Basic example">
-                  <button type="button" className="btn btn-social btn-google">
-                    <i className="fab fa-google"></i>
-                  </button>
-                  <button type="button" className="btn btn-social btn-google btn-lg btn-block">
-                    Registrarse con Google
-                  </button>
+                <div className="row justify-content-center">
+                  <div className="col-6">
+                    <Google />
+                  </div>
                 </div>
+                
 
                 <hr />
 

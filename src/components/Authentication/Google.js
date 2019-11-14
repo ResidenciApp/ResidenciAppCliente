@@ -6,9 +6,9 @@ import axios from 'axios';
 import config from '../../config';
 
 
-import FacebookLogin from 'react-facebook-login'
+import GoogleLogin from 'react-google-login'
 
-class Facebook extends Component {
+class Google extends Component {
 
   constructor(props) {
     super(props);
@@ -26,27 +26,22 @@ class Facebook extends Component {
         password: ""
     }
 
-    this.componentClicked = this.componentClicked.bind(this);
-    this.responseFacebook = this.responseFacebook.bind(this);
+    this.responseGoogle = this.responseGoogle.bind(this);
   }
 
-  componentClicked() {
-    console.log("Clicked")
-  }
-
-  async responseFacebook(response) {
+  async responseGoogle(response) {
     console.log(response)
-    var pass = response.userID;
+    console.log(response.w3)
 
     this.setState({
-        name: response.first_name,
-        lastname: response.last_name,
+        name: response.w3.ofa,
+        lastname: response.w3.wea,
         age: 0,
-        username: response.email.split('@')[0],
-        email: response.email,
-        avatar: response.picture.data.url,
+        username: response.w3.U3.split('@')[0],
+        email: response.w3.U3,
+        avatar: response.w3.Paa,
         sex: 'O',
-        password: pass
+        password: response.w3.Eea
     })
 
 
@@ -92,7 +87,7 @@ class Facebook extends Component {
     })
 
     // if(data.status === 400 && data.message === "USERNAME_ALREADY_EXISTS") {
-    //   alert('Ya tiene una cuenta registrada, por favor inicie sesion');
+    //     alert('Ya tiene una cuenta registrada, por favor inicie sesion');
     // }
 
     // Iniciar Sesion
@@ -132,35 +127,31 @@ class Facebook extends Component {
         localStorage.setItem('TOKEN', data.Token);
         this.props.history.push('/')
     }
-
   }
 
   render() {
-    let fbComponent;
+    let googleComponent;
 
     if(this.state.isLoggedIn){
-        fbComponent = null;
+        googleComponent = null;
     } else {
-        fbComponent = (
-            <FacebookLogin
-                appId="1029172187420220"
-                autoLoad={true}
-                fields="name,email,picture,last_name,first_name"
-                onClick={this.componentClicked}
-                callback={this.responseFacebook}
-                cssClass="btn btn-social btn-facebook btn-lg btn-block"
-                textButton=" Registrarse Con Facebook"
-                icon="fab fa-facebook-square"
+        googleComponent = (
+            <GoogleLogin
+                clientId="759676249086-po013qubf1mf4nfsrjj8uk5kc421eqn8.apps.googleusercontent.com"
+                buttonText="Registrarse Con Google"
+                onSuccess={this.responseGoogle}
+                onFailure={this.responseGoogle}
+                icon
             />
         )
     }
 
     return (
       <div >
-        {fbComponent}
+        {googleComponent}
       </div>
     )
   }
 }
 
-export default withRouter(Facebook);
+export default withRouter(Google);
