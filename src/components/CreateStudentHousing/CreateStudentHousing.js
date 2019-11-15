@@ -16,23 +16,40 @@ class CreateStudentHousing extends Component {
       owner: "",
       housingName: "",
       averagePrice: 0,
-      adress: "",
-      email: "",
-      contactNumber:0,
+      address: "",
       locality: "",
-      includedServices: ""
+      includedServices: [],
+      description: "",
+      city: "",
+      rules: ""
     }
     
     this.checkStatus  = this.checkStatus.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.updateUserName = this.updateUserName.bind(this);
+
+    this.updateUserName();
     
   }
 
   handleChange(event) {
-    this.setState({
-      [event.target.name]: event.target.value
-    });
+    if(event.target.type==='checkbox' && event.target.name==='includedServices') {
+      var arr = this.state.includedServices;
+      if(event.target.checked) {
+        arr.push(parseInt(event.target.value))
+      } else {
+        arr.splice(arr.indexOf(parseInt(event.target.value)), 1)
+      }
+
+      this.setState({
+        includedServices: arr
+      })
+    } else {
+      this.setState({
+        [event.target.name]: event.target.value
+      });
+    }
   }
 
   async handleSubmit(event) {
@@ -40,14 +57,9 @@ class CreateStudentHousing extends Component {
     
     console.log(this.state);
 
-    var path = '/api/v1/users/people/';
+    var path = '/api/v1/student_housing/residence_publication/';
     var url = config.urlServer + path;
 
-    // TODO: hacer el avatar dinamicamente con el correo
-    var avatar = 'https://secure.gravatar.com/avatar/767fc9c115a1b989744c755db47feb60?size=100';
-    // TODO: implementar token
-
-    var token = 'token-key';
 
     var data = undefined;
 
@@ -60,32 +72,31 @@ class CreateStudentHousing extends Component {
         owner,
         housingName,
         averagePrice,
-        adress,
-        email,
+        address,
         contactNumber,
         locality,
         includedServices,
-        description
+        description,
+        city,
+        rules
     } = this.state;
 
-    // TODO: Verificar que contraseñas sean correctas
-    // password == passwordAgain
 
-    await axios.post(url, {
+    var data = await axios.post(url, {
       owner: owner,
-      housingName: housingName,
-      averagePrice: averagePrice,
-      adress: adress,
-      phone: contactNumber,
-      mail: email,
+      name: housingName,
+      price: averagePrice,
+      address: address,
       locality: locality,
-      includedServices: includedServices,
-      description: description
+      services: includedServices,
+      description: description,
+      city: city,
+      rules: rules,
+      photo: ''
     }).then((response) => {
-      data = response.data;
-      console.log(data);
-
-      this.checkStatus(data);
+      console.log(response.data);
+      this.checkStatus(response.data);
+      return data;
     })
 
   }
@@ -96,9 +107,46 @@ class CreateStudentHousing extends Component {
       return this.props.history.push('/');
     }
 
-    if(data.status === 400 && data.message === "USERNAME_ALREADY_EXISTS") {
-      alert('Nombre de Usuario ya Existe');
+    if(data.status === 400) {
+      alert('Ocurrio un error al registrar la residencia');
     }
+  }
+
+  async updateUserName() {
+
+    // Obtener Token del LocalStorage
+    var token = localStorage.getItem('TOKEN');
+
+    var path = '/api/v1/users/token-role/';
+    var url = config.urlServer + path;
+
+    // Hace una consulta POST: /api/v1/users/token-role/
+    // Que trae el 'role' y el 'username' del usuario
+
+    await axios.post(url, {
+      headers: {
+        Authorization: `Token ${token}`
+      } 
+    })
+    .then(response => {
+      var data = response.data;
+
+      console.log(data)
+      
+      // Verificar que la consulta tenga una respuesta positiva
+      if(data.status===200 && data.message==='OK') {
+        // Actualizar el estado 'username'
+        this.setState({
+          owner: data.username
+        })
+      }
+
+    })
+    .catch(error => {
+      alert('Ocurrio un Error');
+      console.log(error);
+    });
+
   }
 
   render() {
@@ -120,30 +168,6 @@ class CreateStudentHousing extends Component {
                 <h5 className="text-center">Ingrese los datos de su residencia</h5>
                 
                 <form onSubmit={this.handleSubmit} role="form" id="form" method="POST">
-
-                  <div className="input-group mb-3">
-                    <div className="input-group-prepend">
-                      <span className="input-group-text" id="name">
-                        <i className="fas fa-address-card"></i>
-                      </span>
-                    </div>
-
-                    <input
-                      type="text"
-                      className="form-control"
-                      aria-label="Default"
-                      aria-describedby="owner"
-                      placeholder="Ingrese el nombre del propietario"
-                      name="owner"
-                      value={this.state.name}
-                      onChange={this.handleChange}
-                      required
-                    />
-
-                    <div className="input-group-prepend">
-                      <span className="input-group-text">Propietario</span>
-                    </div>
-                  </div>
 
                   <div className="input-group mb-3">
                     <div className="input-group-prepend">
@@ -181,7 +205,7 @@ class CreateStudentHousing extends Component {
                       className="form-control"
                       aria-label="Default"
                       aria-describedby="averagePrice"
-                      placeholder="Ingrese el precio promedio (sin puntos ni comas)"
+                      placeholder="Ingrese el precio (sin puntos ni comas)"
                       name="averagePrice"
                       value={this.state.averagePrice}
                       onChange={this.handleChange}
@@ -189,57 +213,56 @@ class CreateStudentHousing extends Component {
                     />
 
                     <div className="input-group-prepend">
-                      <span className="input-group-text">Precio Promedio</span>
+                      <span className="input-group-text">Precio</span>
                     </div>
                   </div>
 
                   <div className="input-group mb-3">
                     <div className="input-group-prepend">
-                      <span className="input-group-text" id="email">
-                        <i className="fas fa-envelope"></i>
+                      <span className="input-group-text" id="address">
+                        <i class="fas fa-street-view"></i>
                       </span>
                     </div>
 
                     <input
-                      type="email"
+                      type="address"
                       className="form-control"
                       aria-label="Default"
-                      aria-describedby="email"
-                      placeholder="Ingrese su Correo"
-                      name="email"
-                      value={this.state.email}
+                      aria-describedby="address"
+                      placeholder="Ingrese la Dirección"
+                      name="address"
+                      value={this.state.address}
                       onChange={this.handleChange}
                       required
                     />
 
                     <div className="input-group-prepend">
-                      <span className="input-group-text">Correo</span>
+                      <span className="input-group-text">Dirección</span>
                     </div>
                   </div>
-                   
-                 
-                  
+
                   <div className="input-group mb-3">
                     <div className="input-group-prepend">
-                      <span className="input-group-text" id="contactNumber">
-                        <i className="fas fa-phone-square"></i>
-                      </span>
+                      <label className="input-group-text">
+                      <i class="fas fa-building"></i>
+                      </label>
                     </div>
 
-                    <input
-                      type="tel"
-                      className="form-control"
-                      aria-label="Default"
-                      aria-describedby="contactNumber"
-                      placeholder="Ingrese un número de contacto"
-                      name="contactNumber"
-                      value={this.state.phone}
+                    <select
+                      className="custom-select" 
+                      id="city"
+                      name="city"
+                      value={this.state.city}
                       onChange={this.handleChange}
                       required
-                    />
+                      >
+
+                      <option defaultValue="N">Elegir Ciudad...</option>
+                      <option value="15">Bogotá D.C.</option>
+                    </select>
 
                     <div className="input-group-prepend">
-                      <span className="input-group-text">Número de contacto</span>
+                      <label className="input-group-text" htmlFor="city">Ciudad</label>
                     </div>
                   </div>
 
@@ -299,13 +322,13 @@ class CreateStudentHousing extends Component {
                     </div>
                     <div className="input-group-prepend">
                       <span>
-                        <input type="checkbox" name="includedServices" value="Food"/> Alimentación<br></br>
-                        <input type="checkbox" name="includedServices" value="TVCable" /> Cable TV<br></br>
-                        <input type="checkbox" name="includedServices" value="Internet" /> Internet<br></br>
-                        <input type="checkbox" name="includedServices" value="Laundry"/> Lavandería<br></br>
-                        <input type="checkbox" name="includedServices" value="Cleaning" /> Limpieza<br></br>
-                        <input type="checkbox" name="includedServices" value="AvailableKitchen"/> Cocina disponible<br></br>
-                        <input type="checkbox" name="includedServices" value="PrivateBathroom" /> Baño privado<br></br>
+                        <input type="checkbox" name="includedServices" value="1" onChange={this.handleChange} /> Alimentación<br></br>
+                        <input type="checkbox" name="includedServices" value="2" onChange={this.handleChange} /> Cable TV<br></br>
+                        <input type="checkbox" name="includedServices" value="3" onChange={this.handleChange} /> Internet<br></br>
+                        <input type="checkbox" name="includedServices" value="4" onChange={this.handleChange} /> Lavandería<br></br>
+                        <input type="checkbox" name="includedServices" value="5" onChange={this.handleChange} /> Limpieza<br></br>
+                        <input type="checkbox" name="includedServices" value="6" onChange={this.handleChange} /> Cocina disponible<br></br>
+                        <input type="checkbox" name="includedServices" value="7" onChange={this.handleChange} /> Baño privado<br></br>
                       </span>
                       
 
@@ -320,36 +343,45 @@ class CreateStudentHousing extends Component {
                       
                     </div>
 
-                    <textarea name="description" cols="40" rows="10"></textarea>
+                    <textarea
+                      name="description"
+                      cols="40"
+                      rows="10"
+                      id="description"
+                      name="description"
+                      value={this.state.description}
+                      onChange={this.handleChange}
+                      required
+                    >
+                    </textarea>
 
                     
                   </div>
 
                   <div className="input-group mb-3">
                     <div className="input-group-prepend">
-                      <span className="input-group-text" id="description">
-                        <i className="fas fa-fingerprint"></i>
-                      </span>
+                      
+                      <span className="input-group-text" id='rules'>Reglas</span>
+                        
+                      
                     </div>
 
-                    <input
-                      type="text"
-                      className="form-control"
-                      aria-label="Default"
-                      aria-describedby="housingName"
-                      placeholder="Ingrese el nombre de la residencia"
-                      name="housingName"
-                      value={this.state.housingName}
+                    <textarea
+                      name="rules"
+                      cols="43"
+                      rows="3"
+                      id="rules"
+                      name="rules"
+                      value={this.state.rules}
                       onChange={this.handleChange}
                       required
-                    />
+                    >
+                    </textarea>
 
-                    <div className="input-group-prepend">
-                      <span className="input-group-text">Nombre Residencia</span>
-                    </div>
+                    
                   </div>
 
-                  <button type="submit" className="btn btn-residenciapp-green btn-lg btn-block">Submit</button>
+                  <button type="submit" className="btn btn-residenciapp-green btn-lg btn-block">Registrar Residencia</button>
                   <br />
 
                   
