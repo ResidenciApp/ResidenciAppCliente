@@ -21,13 +21,18 @@ class CreateStudentHousing extends Component {
       includedServices: [],
       description: "",
       city: "",
-      rules: ""
+      rules: "",
+      file: undefined,
+      imgPath: ''
     }
     
     this.checkStatus  = this.checkStatus.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.updateUserName = this.updateUserName.bind(this);
+    this.uploadImage = this.uploadImage.bind(this);
+    this.handleUpload = this.handleUpload.bind(this);
+    this.setImage = this.setImage.bind(this);
 
     this.updateUserName();
     
@@ -78,8 +83,11 @@ class CreateStudentHousing extends Component {
         includedServices,
         description,
         city,
-        rules
+        rules,
+        imgPath
     } = this.state;
+
+    console.log(this.state)
 
 
     var data = await axios.post(url, {
@@ -92,7 +100,7 @@ class CreateStudentHousing extends Component {
       description: description,
       city: city,
       rules: rules,
-      photo: ''
+      photo: imgPath
     }).then((response) => {
       console.log(response.data);
       this.checkStatus(response.data);
@@ -146,6 +154,44 @@ class CreateStudentHousing extends Component {
       alert('Ocurrio un Error');
       console.log(error);
     });
+
+  }
+
+  async uploadImage(event) {
+    let files = event.target.files;
+    await this.handleUpload(files[0], this.setImage);
+  }
+
+  async setImage(data) {
+    this.setState({
+      imgPath: data
+    })
+
+    console.log(this.state.imgPath)
+    alert('La imagen se cargo correctamente')
+  }
+
+
+  async handleUpload (file, func) {
+    let reader = new FileReader();
+    await reader.readAsDataURL(file);
+
+    reader.onload = await function(e) {
+      const url = config.urlServer + '/api/v1/student_housing/upload-photo-residence/';
+      const data = {
+        file: e.target.result
+      }
+
+      return axios.post(url, data)
+        .then(response => {
+
+          if(response.status > 200 && response.status < 300) {
+            func(response.data.url);
+          }
+
+          return response;
+        })
+    }
 
   }
 
@@ -215,6 +261,26 @@ class CreateStudentHousing extends Component {
                     <div className="input-group-prepend">
                       <span className="input-group-text">Precio</span>
                     </div>
+                  </div>
+
+                  <div className="input-group mb-3">
+
+                    <input
+                      type="file"
+                      className="form-control"
+                      aria-label="Default"
+                      aria-describedby="file"
+                      placeholder="Subir Imagen"
+                      name="file"
+                      id="file"
+                      onChange={this.uploadImage}
+                      required
+                    />
+
+                    <div className="input-group-prepend">
+                      <span className="input-group-text">Subir Imagen</span>
+                    </div>
+
                   </div>
 
                   <div className="input-group mb-3">
