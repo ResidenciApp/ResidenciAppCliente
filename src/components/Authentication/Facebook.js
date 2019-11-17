@@ -13,6 +13,7 @@ class Facebook extends Component {
   constructor(props) {
     super(props);
 
+    // Definiendo estados que se van a usar en el componente
     this.state = {
         isLoggedIn: false,
         userID: '',
@@ -25,7 +26,7 @@ class Facebook extends Component {
         sex: "",
         password: ""
     }
-
+    // definiendo funciones que se van a utilizar en el componente
     this.componentClicked = this.componentClicked.bind(this);
     this.responseFacebook = this.responseFacebook.bind(this);
   }
@@ -37,7 +38,8 @@ class Facebook extends Component {
   async responseFacebook(response) {
     console.log(response)
     var pass = response.userID;
-
+    
+    // actualizando estados
     this.setState({
         name: response.first_name,
         lastname: response.last_name,
@@ -49,9 +51,10 @@ class Facebook extends Component {
         password: pass
     })
 
-
+    // ruta para registrar usuarios
     var path = '/api/v1/users/people/';
     var url = config.urlServer + path;
+    // inicializando el token
     var token = 'token-key';
 
     var data = undefined;
@@ -61,6 +64,7 @@ class Facebook extends Component {
     axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
     axios.defaults.xsrfCookieName = "csrftoken";
 
+    // pasando los estados a variables locales
     var {
       name,
       lastname,
@@ -72,7 +76,7 @@ class Facebook extends Component {
       avatar
     } = this.state;
 
-
+    // registar usuario
     var data = await axios.post(url, {
       name: name,
       lastName: lastname,
@@ -126,7 +130,7 @@ class Facebook extends Component {
     if(data.status === 400 && data.message === 'USERNAME_OR_PASSWORD_IS_NONE') {
         alert('Nombre de Usuario o Contraseña Incorrecta')
     }
-
+    // guardar el token en el localstorage
     if(data.status === 200 && data.message === 'OK') {
         localStorage.removeItem('TOKEN');
         localStorage.setItem('TOKEN', data.Token);
