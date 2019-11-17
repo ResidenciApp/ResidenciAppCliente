@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {withRouter} from 'react-router-dom';
 import axios from 'axios';
+import gravatar from 'gravatar';
 
 import config from '../../config';
 
@@ -43,11 +44,6 @@ class CheckInOwner extends Component {
     var path = '/api/v1/users/people/';
     var url = config.urlServer + path;
 
-
-    // TODO: hacer el avatar dinamicamente con el correo
-    var avatar = 'https://secure.gravatar.com/avatar/767fc9c115a1b989744c755db47feb60?size=100';
-    // TODO: implementar token
-
     var token = 'token-key';
 
     var data = undefined;
@@ -70,8 +66,12 @@ class CheckInOwner extends Component {
       sex
     } = this.state;
 
-    // TODO: Verificar que contraseñas sean correctas
-    // password == passwordAgain
+    var avatar = gravatar.url(email, {s: 700, d: 'https://i.ibb.co/G7jV2zr/profile.png'});
+
+    if(password !== passwordAgain || password==='') {
+      alert("Contraseñas diferentes");
+      return;
+    }
 
     await axios.post(url, {
       name: name,

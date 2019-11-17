@@ -16,7 +16,8 @@ class Navigation extends Component {
 
     this.state = {
       isLogged: false,
-      username: ''
+      username: '',
+      role: ''
     };
 
     this.componentDidMount = this.componentDidMount.bind(this);
@@ -119,12 +120,15 @@ class Navigation extends Component {
     })
     .then(response => {
       var data = response.data;
+
+      console.log(data)
       
       // Verificar que la consulta tenga una respuesta positiva
       if(data.status===200 && data.message==='OK') {
         // Actualizar el estado 'username'
         this.setState({
-          username: data.username
+          username: data.username,
+          role: data.role_name
         })
       }
 
@@ -138,11 +142,14 @@ class Navigation extends Component {
 
   render() {
     var elements = [];
+    
+    var userProfile = '';
 
     // Verificar si el usuario esta Logueado
     if(this.state.isLogged) {
       // En caso de que esté Logueado, Muestra los siguientes Items
       // En la barra de Navegación
+
 
       elements.push({
         name: 'Home',
@@ -154,7 +161,27 @@ class Navigation extends Component {
         name: 'Buscar Residencia',
         path: '#',
         icon: 'fas fa-search-location'
-      })
+      });
+
+      if (this.state.role === 'Usuario') {
+        // Rutas que solo puede acceder el Usuario
+        // userProfile = '/perfil/'+this.state.username;
+      } else if(this.state.role === 'Propietario') {
+        // Rutas que solo puede acceder el Propietario
+
+        userProfile = '/perfil-propietario/'+this.state.username;
+
+        elements.push({
+          name: 'Registrar Residencia',
+          path: '/registrar-residencia',
+          icon: 'fas fa-plus'
+        })
+
+      } else if (this.state.role === 'Administrador') {
+        // Rutas que solo puede acceder el Administrador
+      }
+
+      
     } else {
 
       // En caso de que el usuario no este Logueado
@@ -182,6 +209,7 @@ class Navigation extends Component {
         path: '/registrar-propietario',
         icon: 'fas fa-building'
       });
+      
     }
 
     return (
@@ -226,7 +254,7 @@ class Navigation extends Component {
                       <span className="fas fa-user-friends"></span> {this.state.username}
                     </a>
                     <div className="dropdown-menu">
-                      <a className="dropdown-item" href="#">Perfil</a>
+                      <a className="dropdown-item" href={userProfile}>Perfil</a>
                       
                       <br/>
 

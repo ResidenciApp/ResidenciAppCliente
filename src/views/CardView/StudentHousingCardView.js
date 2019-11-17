@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import {withRouter} from 'react-router-dom';
+import axios from 'axios';
+
+import config from '../../config';
 
 import StudentHousingCard from '../../components/Card/StudentHousingCard';
 
@@ -7,9 +10,38 @@ class StudentHousingCardView extends Component {
 
   constructor(props) {
     super(props);
+
+    this.state = {
+      residences: []
+    }
+
+
+    this.handle = this.handle.bind(this);
+
+    this.handle();
+  }
+
+  async handle() {
+    var url = config.urlServer + '/api/v1/student_housing/residence_publication/';
+
+    var data = await axios.get(url)
+      .then(response => {
+        console.log(response.data)
+        return response.data;
+      })
+      .catch(err => {
+        console.error('Ocurrio un error al cargar la lista de publicaciones');
+      })
+
+    this.setState({
+      residences: data
+    })
+
   }
 
   render() {
+
+    var elements = this.state.residences;
     return (
       <div id="StudentHousingCardView" className="container">
 
@@ -39,8 +71,28 @@ class StudentHousingCardView extends Component {
 
         <div className="card">
           <div className="card-body">
-          <div className="row">
+          
 
+            {
+              this.state.residences.length > 0?
+              
+              <div className="row">
+              
+
+                {this.state.residences.map((value, index) => {
+                  return <StudentHousingCard
+                    title={value.name}
+                    img={value.photo}
+                    desc="Pequeña descripción de la Residencia"
+                    review="152 reviews"
+                    orders="154 orders"
+                    url="#"
+                    price={value.price}
+                  />
+                })}
+              </div>
+              :
+              <div className="row">
             <StudentHousingCard
               title="Nombre de la Residencia"
               img="https://vivienda.uniandes.edu.co/images/img/Individual_04.jpg"
@@ -49,7 +101,7 @@ class StudentHousingCardView extends Component {
               orders="154 orders"
               url="#"
               price="$1.280.000"
-              price_old="$1.980.000"
+              owner="lmbaeza"
             />
 
             <StudentHousingCard
@@ -60,7 +112,7 @@ class StudentHousingCardView extends Component {
               orders="154 orders"
               url="#"
               price="$1.280.000"
-              price_old="$1.980.000"
+              owner="lmbaeza"
             />
 
             <StudentHousingCard
@@ -71,7 +123,7 @@ class StudentHousingCardView extends Component {
               orders="154 orders"
               url="#"
               price="$1.280.000"
-              price_old="$1.980.000"
+              owner="lmbaeza"
             />
 
             <StudentHousingCard
@@ -82,7 +134,7 @@ class StudentHousingCardView extends Component {
               orders="154 orders"
               url="#"
               price="$1.280.000"
-              price_old="$1.980.000"
+              owner="lmbaeza"
             />
 
             <StudentHousingCard
@@ -93,7 +145,7 @@ class StudentHousingCardView extends Component {
               orders="154 orders"
               url="#"
               price="$1.280.000"
-              price_old="$1.980.000"
+              owner="lmbaeza"
             />
 
             <StudentHousingCard
@@ -105,8 +157,9 @@ class StudentHousingCardView extends Component {
               url="#"
               price="$1.980.000"
             />
+            </div>
+            }
 
-          </div>
           </div>
         </div>
       </div>

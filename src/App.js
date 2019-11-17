@@ -3,6 +3,7 @@ import './views/App/App.css';
 import Navigation from './components/Navigation/Navigation';
 
 import StudentHousingCardView from './views/CardView/StudentHousingCardView';
+import Footer from './components/Footer/Footer';
 
 class App extends Component {
   render() {
@@ -12,6 +13,8 @@ class App extends Component {
         <Navigation />
         
         <StudentHousingCardView />
+
+        <Footer />
 
       </div>
     );

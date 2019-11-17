@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {withRouter} from 'react-router-dom';
+import NumberFormat from 'react-number-format';
 
 
 import './StudentHousingCard.css';
@@ -41,16 +42,8 @@ class StudentHousingCard extends Component {
             <div className="price-wrap h5">
 
               <span className="price-new">
-                {this.props.price}
+                <NumberFormat value={this.props.price} displayType={'text'} suffix={' COP'} thousandSeparator={true} prefix={'$ '} />
               </span>
-              
-              {
-                this.props.price_old?
-                  <del className="price-old">{this.props.price_old}</del>
-                :
-                  <div></div>
-              }
-              
             </div>
 
           </div>

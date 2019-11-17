@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import {withRouter} from 'react-router-dom';
 import axios from 'axios';
+import gravatar from 'gravatar';
 
 import config from '../../config';
 
 import './CheckIn.css';
+
+import Facebook from '../Authentication/Facebook'
+import Google from '../Authentication/Google';
 
 class CheckIn extends Component {
 
@@ -25,7 +29,6 @@ class CheckIn extends Component {
     this.checkStatus  = this.checkStatus.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    
   }
 
   handleChange(event) {
@@ -41,10 +44,6 @@ class CheckIn extends Component {
 
     var path = '/api/v1/users/people/';
     var url = config.urlServer + path;
-
-    // TODO: hacer el avatar dinamicamente con el correo
-    var avatar = 'https://secure.gravatar.com/avatar/767fc9c115a1b989744c755db47feb60?size=100';
-    // TODO: implementar token
 
     var token = 'token-key';
 
@@ -66,8 +65,12 @@ class CheckIn extends Component {
       sex
     } = this.state;
 
-    // TODO: Verificar que contraseñas sean correctas
-    // password == passwordAgain
+    var avatar = gravatar.url(email, {s: 700, d: 'https://i.ibb.co/G7jV2zr/profile.png'});
+
+    if(password !== passwordAgain || password==='') {
+      alert("Contraseñas diferentes");
+      return;
+    }
 
     await axios.post(url, {
       name: name,
@@ -113,25 +116,14 @@ class CheckIn extends Component {
               </div>
               <div className="card-body">
 
-                <div className="btn-group btn-group-lg d-flex justify-content-center" role="group" aria-label="Basic example">
-                  <button type="button" className="btn btn-social btn-facebook">
-                    <i className="fab fa-facebook-square"></i>
-                  </button>
-                  <button type="button" className="btn btn-social btn-facebook btn-lg btn-block">
-                    Registrarse con Facebook
-                  </button>
+                <Facebook />
+                <hr />
+                <div className="row justify-content-center">
+                  <div className="col-6">
+                    <Google />
+                  </div>
                 </div>
                 
-                <hr />
-
-                <div className="btn-group btn-group-lg d-flex justify-content-center" role="group" aria-label="Basic example">
-                  <button type="button" className="btn btn-social btn-google">
-                    <i className="fab fa-google"></i>
-                  </button>
-                  <button type="button" className="btn btn-social btn-google btn-lg btn-block">
-                    Registrarse con Google
-                  </button>
-                </div>
 
                 <hr />
 
