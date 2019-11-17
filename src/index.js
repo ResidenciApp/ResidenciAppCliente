@@ -43,7 +43,6 @@ const Application = () =>  (
         <Route exact path="/registrar-propietario" component={CheckInOwnerViewPermission} />
         <Route exact path="/registrar-residencia" component={CreateSHViewPermission}/>
         <Route exact path="/perfil-propietario/:username" component={OwnerProfileViewPermission}/>
-        <Route exact path="/search" component={NavigationBarViewPermission}/>
         <Route component={NotFound404} />
       </Switch>
     </React.Fragment>
