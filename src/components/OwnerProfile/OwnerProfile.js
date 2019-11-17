@@ -23,8 +23,8 @@ class OwnerProfile extends Component {
             sexo: ''    
         }
 
-        let { username } = this.props.match.params;
-        console.log(username)
+        /*let { username } = this.props.match.params;
+        console.log(username)*/
 
         this.handleUpdateData = this.handleUpdateData.bind(this);
 
@@ -73,42 +73,42 @@ class OwnerProfile extends Component {
   render() {
     return (
      
-        <div class="container emp-profile">
+        <div className="container emp-profile">
             <form method="post">    
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="profile-img">
+                <div className="row">
+                    <div className="col-md-4">
+                        <div className="profile-img">
                             <img src={this.state.avatar} alt=""/>
-                            <div class="file btn btn-lg btn-primary">
+                            <div className="file btn btn-lg btn-primary">
                                 Cambiar foto
                                 <input type="file" name="file"/>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="profile-head">
+                    <div className="col-md-6">
+                        <div className="profile-head">
                                     <h5>
                                         {this.state.name + ' ' + this.state.lastName}
                                     </h5>
                                     <h6>
                                         Descripción o biografía
                                     </h6>
-                                    <p class="proile-rating">RANKINGS : <span>8/10</span></p>
-                            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                <li class="nav-item">
+                                    <p className="proile-rating">RANKINGS : <span>8/10</span></p>
+                            <ul className="nav nav-tabs" id="myTab" role="tablist">
+                                <li className="nav-item">
                                     Acerca de mí
                                 </li>
                                 
                             </ul>
                         </div>
                     </div>
-                    <div class="col-md-2">
-                        <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
+                    <div className="col-md-2">
+                        <input type="submit" className="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="profile-work">
+                <div className="row">
+                    <div className="col-md-4">
+                        <div className="profile-work">
                             <p>MIS PROPIEDADES</p>
                             <a href="">Propiedad1</a><br/>
                             <a href="">Propiedad2</a><br/>
@@ -116,38 +116,38 @@ class OwnerProfile extends Component {
                             
                         </div>
                     </div>
-                    <div class="col-md-8">
-                        <div class="tab-content profile-tab" id="myTabContent">
-                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                        <div class="row">
-                                            <div class="col-md-6">
+                    <div className="col-md-8">
+                        <div className="tab-content profile-tab" id="myTabContent">
+                            <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                        <div className="row">
+                                            <div className="col-md-6">
                                                 <label>Nombre de Usuario</label>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div className="col-md-6">
                                                 <p>{this.state.username}</p>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
+                                        <div className="row">
+                                            <div className="col-md-6">
                                                 <label>Nombre</label>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div className="col-md-6">
                                                 <p>{this.state.name + ' ' + this.state.lastName}</p>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
+                                        <div className="row">
+                                            <div className="col-md-6">
                                                 <label>Email</label>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div className="col-md-6">
                                                 <p>{this.state.email}</p>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
+                                        <div className="row">
+                                            <div className="col-md-6">
                                                 <label>Teléfono de contacto</label>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div className="col-md-6">
                                                 <p>123 456 7890</p>
                                             </div>
                                         </div>
@@ -163,4 +163,4 @@ class OwnerProfile extends Component {
   }
 }
 
-export default withRouter(OwnerProfile);
+export default OwnerProfile;

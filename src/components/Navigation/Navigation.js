@@ -240,11 +240,11 @@ class Navigation extends Component {
         
             <ul className="navbar-nav mr-auto">
 
-              {elements.map((value) => {
+              {elements.map((value, index) => {
                 return (
-                  <li className={"nav-item"}>
-                    <a className={"nav-link"} href={value.path}>
-                      <i className={value.icon}></i> {value.name}
+                  <li key={index} className={"nav-item"}>
+                    <a key={index} className={"nav-link"} href={value.path}>
+                      <i key={index} className={value.icon}></i> {value.name}
                     </a>
                   </li>
                 )
