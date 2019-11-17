@@ -70,7 +70,7 @@ export default class NavigationBar extends config{
                             </div>
                         </div>
                         <div class="col-md-2">
-                            <button type="button" class="btn btn-warning  pl-5 pr-5">Buscar</button>
+                            <button id="gt" type="button" class="btn btn-warning  pl-5 pr-5">Buscar</button>
                         </div>
                     </div>
                     
@@ -86,7 +86,7 @@ export default class NavigationBar extends config{
             placeholder: 'Servicios',
             search: true,
             selectAll: true
-        }); 
+        }) 
     }    
     
 }
