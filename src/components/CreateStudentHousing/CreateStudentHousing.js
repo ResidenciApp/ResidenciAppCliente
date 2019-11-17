@@ -197,7 +197,7 @@ class CreateStudentHousing extends Component {
 
   render() {
     return (
-      <div className="container checkin">
+      <div data-testid="Register_residence_form" className="container checkin">
         <div className="row">
           <div className="col-md-6 mx-auto">
             <br/>
@@ -286,7 +286,7 @@ class CreateStudentHousing extends Component {
                   <div className="input-group mb-3">
                     <div className="input-group-prepend">
                       <span className="input-group-text" id="address">
-                        <i class="fas fa-street-view"></i>
+                        <i className="fas fa-street-view"></i>
                       </span>
                     </div>
 
@@ -310,7 +310,7 @@ class CreateStudentHousing extends Component {
                   <div className="input-group mb-3">
                     <div className="input-group-prepend">
                       <label className="input-group-text">
-                      <i class="fas fa-building"></i>
+                      <i className="fas fa-building"></i>
                       </label>
                     </div>
 
@@ -463,4 +463,4 @@ class CreateStudentHousing extends Component {
   }
 }
 
-export default withRouter(CreateStudentHousing);
+export default CreateStudentHousing;
