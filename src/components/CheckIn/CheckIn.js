@@ -15,6 +15,7 @@ class CheckIn extends Component {
   constructor(props) {
     super(props);
 
+    // Definiendo estados que se van a usar en el componente
     this.state = {
       name: "",
       lastname: "",
@@ -26,12 +27,14 @@ class CheckIn extends Component {
       passwordAgain: ""
     }
     
+    // Definiendo las funciones que se van a usar en el componente
     this.checkStatus  = this.checkStatus.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event) {
+    // Actualizar estados cada vez que se hace un cambio en el formulario
     this.setState({
       [event.target.name]: event.target.value
     });
@@ -42,9 +45,11 @@ class CheckIn extends Component {
     
     console.log(this.state);
 
+    // Ruta para registrar usuario
     var path = '/api/v1/users/people/';
     var url = config.urlServer + path;
 
+    // inicializar variable token
     var token = 'token-key';
 
     var data = undefined;
@@ -65,13 +70,17 @@ class CheckIn extends Component {
       sex
     } = this.state;
 
+    // obtener imagen de perfil mediante el servicio 'Gravatar'
+    // d: default
     var avatar = gravatar.url(email, {s: 700, d: 'https://i.ibb.co/G7jV2zr/profile.png'});
 
+    // Verificar que las contraseñas sean correctas
     if(password !== passwordAgain || password==='') {
       alert("Contraseñas diferentes");
       return;
     }
 
+    // Registrar el usuario
     await axios.post(url, {
       name: name,
       lastName: lastname,
@@ -87,17 +96,21 @@ class CheckIn extends Component {
       data = response.data;
       console.log(data);
 
+      // verificar el response
       this.checkStatus(data);
     })
 
   }
 
   checkStatus(data) {
+    // El usuario se registrar  correctamente
     if(data.status === 201 && data.message === "OK") {
       alert('Se registro correctamente');
+      // redireccionar al Home
       return this.props.history.push('/');
     }
 
+    // El nombre de usuario ya existe
     if(data.status === 400 && data.message === "USERNAME_ALREADY_EXISTS") {
       alert('Nombre de Usuario ya Existe');
     }

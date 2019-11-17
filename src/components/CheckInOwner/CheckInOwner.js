@@ -12,6 +12,7 @@ class CheckInOwner extends Component {
   constructor(props) {
     super(props);
 
+    // Definiendo estados que se van a usar en el componente
     this.state = {
       name: "",
       lastname: "",
@@ -25,12 +26,14 @@ class CheckInOwner extends Component {
       passwordAgain: ""
     }
 
+    // definiendo funciones que se van a usar en el componente
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.checkStatus  = this.checkStatus.bind(this);
   }
 
   handleChange(event) {
+    // Actualizar estados cada vez que se realicé un cambio en el formulario
     this.setState({
       [event.target.name]: event.target.value
     });
@@ -40,10 +43,11 @@ class CheckInOwner extends Component {
     event.preventDefault();
 
     console.log(this.state);
-
+    // Ruta para registrar propietario
     var path = '/api/v1/users/people/';
     var url = config.urlServer + path;
 
+    // Inicializar variable de token
     var token = 'token-key';
 
     var data = undefined;
@@ -52,7 +56,7 @@ class CheckInOwner extends Component {
     axios.defaults.withCredentials = true;
     axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
     axios.defaults.xsrfCookieName = "csrftoken";
-
+    // pasar los estados a variables locales
     var {
       name,
       lastname,
@@ -65,14 +69,17 @@ class CheckInOwner extends Component {
       idNumber, 
       sex
     } = this.state;
-
+    // Obtener la foto de perfil de usuario mediante el servicio 'Gravatar'
+    // d: default
     var avatar = gravatar.url(email, {s: 700, d: 'https://i.ibb.co/G7jV2zr/profile.png'});
 
+    // Verificar contraseñas
     if(password !== passwordAgain || password==='') {
       alert("Contraseñas diferentes");
       return;
     }
-
+    
+    // registrar Propietarios
     await axios.post(url, {
       name: name,
       lastName: lastname,
@@ -89,16 +96,20 @@ class CheckInOwner extends Component {
     }).then((response) => {
       data = response.data;
       console.log(data);
+
+      // Verificar la respuesta
       this.checkStatus(data);
     })
   }
 
   checkStatus(data) {
+    // El propietario se registró correctamente
     if(data.status === 201 && data.message === "OK") {
       alert('Se registro correctamente');
       return this.props.history.push('/');
     }
 
+    // El nombre de usuario ya existe
     if(data.status === 400 && data.message === "USERNAME_ALREADY_EXISTS") {
       alert('Nombre de Usuario ya Existe');
     }

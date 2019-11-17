@@ -14,12 +14,14 @@ class Navigation extends Component {
   constructor(props) {
     super(props);
 
+    // Se definieron los 3 estados que se van a utilizar
     this.state = {
       isLogged: false,
       username: '',
       role: ''
     };
 
+    // Se declarar las funciones que se van a usar en el componente
     this.componentDidMount = this.componentDidMount.bind(this);
     this.handleLogOut = this.handleLogOut.bind(this);
     this.checkStatus = this.checkStatus.bind(this);
@@ -48,10 +50,13 @@ class Navigation extends Component {
   }
 
   handleLogOut() {
+    // Obtener el TOKEN desde el localstorage
     var token = localStorage.getItem('TOKEN');
     
+    // Ruta a la que se va a hacer la paticion de logout
     var path = '/api/v1/users/api-token-logout/';
 
+    // www.residenciapp.herokuapp.com/api/v1/users/api-token-logout/
     var url = config.urlServer + path;
 
     // CORS Configuration
@@ -75,6 +80,7 @@ class Navigation extends Component {
       
     })
     .catch(error => {
+      // informar al usuario sobre el error
       alert('Ocurrio un Error');
       console.log(error);
     });
@@ -134,6 +140,7 @@ class Navigation extends Component {
 
     })
     .catch(error => {
+      // Informar al usuario sobre el error
       alert('Ocurrio un Error');
       console.log(error);
     });

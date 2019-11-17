@@ -8,7 +8,7 @@ import $ from 'jquery';
 
 
 
-export default class NavigationBar extends config{
+export default class NavigationBar extends Component{
    
     render(){
         return(
@@ -81,7 +81,7 @@ export default class NavigationBar extends config{
 
         
         )
-        ('#langOpt').multiselect({
+        $('#langOpt').multiselect({
             columns: 1,
             placeholder: 'Servicios',
             search: true,
