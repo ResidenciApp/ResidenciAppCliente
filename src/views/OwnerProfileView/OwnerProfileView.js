@@ -6,6 +6,12 @@ import Footer from '../../components/Footer/Footer';
 
 
 export default class OwnerProfileView extends Component {
+
+  constructor(props) {
+    super(props);
+    console.log("View : ", this.props)
+  }
+
   render() {
     return (
       <div className="ownerprofile">
