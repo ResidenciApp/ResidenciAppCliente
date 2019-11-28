@@ -24,14 +24,8 @@ class StudentHousingCardView extends Component {
   async handle() {
     var url = config.urlServer + '/api/v1/student_housing/residence_publication/';
 
-    var data = await axios.get(url)
-      .then(response => {
-        console.log(response.data)
-        return response.data;
-      })
-      .catch(err => {
-        console.error('Ocurrio un error al cargar la lista de publicaciones');
-      })
+    var response = await axios.get(url);
+    var data = response.data;
 
     this.setState({
       residences: data
@@ -86,7 +80,7 @@ class StudentHousingCardView extends Component {
                     desc="Pequeña descripción de la Residencia"
                     review="152 reviews"
                     orders="154 orders"
-                    url="#"
+                    url={"/residencia/" + value.id}
                     price={value.price}
                   />
                 })}
