@@ -15,20 +15,12 @@ class ShowStudentHousingView extends Component {
     
         this.state = {
             name: '',
-            services: [
-              'Limpieza',
-              'Cocina disponible',
-              'Baño privado',
-              'Alimentación',
-              'Internet',
-              'Lavandería',
-              'Cable TV'
-            ],
-            description: 'Pequeña descripción de la Residencia',
+            services: [],
+            description: '',
             price: 0,
             img: '',
             city: 'Bogotá D.C.',
-            address: 'Calle 56 N° 23 - 34'
+            address: ''
         }
     
         console.log(this.props.match.params.id)
@@ -38,7 +30,7 @@ class ShowStudentHousingView extends Component {
     }
 
     async handleData() {
-        var path = '/api/v1/student_housing/residence_publication/'+ this.props.match.params.id;
+        var path = '/api/v1/student_housing/residence_publication/?id='+ this.props.match.params.id;
         var url = config.urlServer + path;
 
 
@@ -52,12 +44,13 @@ class ShowStudentHousingView extends Component {
                 name: publication.name,
                 price: publication.price,
                 img: publication.photo,
+                services: publication.services,
+                description: publication.description,
+                address: publication.address
             })
         }
 
     }
-
-
 
     render() {
 

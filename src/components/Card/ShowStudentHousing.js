@@ -16,15 +16,15 @@ class ShowStudentHousing extends Component {
     handleService(index, data) {
         if((index + 1) % 3 == 0) {
             return (
-                <a class="success">{data}</a>
+                <a class="success">{data.name}</a>
             )
         } else if((index + 1) % 3 == 1) {
             return (
-                <a class="primary">{data}</a>
+                <a class="primary">{data.name}</a>
             )
         } else {
             return (
-                <a class="warning">{data}</a>
+                <a class="warning">{data.name}</a>
             )
         }
     }
