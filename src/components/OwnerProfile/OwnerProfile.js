@@ -23,19 +23,18 @@ class OwnerProfile extends Component {
             sexo: ''    
         }
 
-        /*let { username } = this.props.match.params;
-        console.log(username)*/
 
         this.handleUpdateData = this.handleUpdateData.bind(this);
 
-        this.handleUpdateData();
+        this.handleUpdateData(this.props.match.params.username);
     }
 
-    async handleUpdateData() {
+    async handleUpdateData(username) {
         event.preventDefault();
 
         var path = '/api/v1/users/people/?username=';
-        var url = config.urlServer + path + this.props.match.params.username;
+
+        var url = config.urlServer + path + username;
 
         var user = await axios.get(url)
             .then(response => {
@@ -163,4 +162,4 @@ class OwnerProfile extends Component {
   }
 }
 
-export default OwnerProfile;
+export default withRouter(OwnerProfile);
