@@ -1,0 +1,95 @@
+.panel {
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+}
+
+.panel-title {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 16px;
+    color: inherit;
+}
+
+.h4 {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.h3 {
+    margin-top: .5rem;
+}
+
+.tab-content img {
+    width: 100%;
+    -webkit-animation-name: opacity;
+    animation-name: opacity;
+    -webkit-animation-duration: .3s;
+    animation-duration: .3s;
+}
+
+.card-show {
+    margin-top: 50px;
+    background: #eee;
+    padding: 3em;
+    line-height: 1.5em;
+}
+
+@media screen and (min-width: 997px) {
+    .wrapper {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+    }
+}
+
+.tags a {
+    border: 1px solid #DDD;
+    display: inline-block;
+    color: #717171;
+    background: #FFF;
+    -webkit-box-shadow: 0 1px 1px 0 rgba(180, 180, 180, 0.1);
+    box-shadow: 0 1px 1px 0 rgba(180, 180, 180, 0.1);
+    -webkit-transition: all .1s ease-in-out;
+    -moz-transition: all .1s ease-in-out;
+    -o-transition: all .1s ease-in-out;
+    -ms-transition: all .1s ease-in-out;
+    transition: all .1s ease-in-out;
+    border-radius: 2px;
+    margin: 0 3px 6px 0;
+    padding: 5px 10px
+}
+
+.tags a.primary {
+    color: #FFF;
+    background-color: #007bff;
+    border-color: #007bff
+}
+
+.tags a.success {
+    color: #FFF;
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.tags a.warning {
+    color: #FFF;
+    background-color: #ffc107;
+    border-color: #ffc107;
+}
+
+.tags a.primary:hover {
+    color: #FFF;
+}
+
+.tags a.success:hover {
+    color: #FFF;
+}
+
+.tags a.warning:hover {
+    color: #FFF;
+}
