@@ -19,6 +19,7 @@ class CheckInOwner extends Component {
       age: 0,
       username: "",
       email: "",
+      phone: "",
       documentType: "", // Tipo de Documentos: CC. TI
       idNumber: "",    // Numero de Identificación
       sex: "",
@@ -65,6 +66,7 @@ class CheckInOwner extends Component {
       password,
       passwordAgain,
       email,
+      phone,
       documentType,
       idNumber, 
       sex
@@ -88,6 +90,7 @@ class CheckInOwner extends Component {
       password: password,
       avatar: avatar,
       mail: email,
+      phone: phone,
       token: token,
       role: 3, // Role 3 ==> Propietario
       sex: sex,
@@ -249,6 +252,31 @@ class CheckInOwner extends Component {
                       <span className="input-group-text">Correo</span>
                     </div>
                   </div>
+
+                  <div className="input-group mb-3">
+                    <div className="input-group-prepend">
+                      <span className="input-group-text" id="phone">
+                        <i className="fas fa-phone-square"></i>
+                      </span>
+                    </div>
+
+                    <input
+                      type="phone"
+                      className="form-control"
+                      aria-label="Default"
+                      aria-describedby="phone"
+                      placeholder="Ingrese su número de teléfono"
+                      name="phone"
+                      value={this.state.phone}
+                      onChange={this.handleChange}
+                      required
+                    />
+
+                    <div className="input-group-prepend">
+                      <span className="input-group-text">Teléfono</span>
+                    </div>
+                  </div>
+
 
                   <div className="input-group mb-3">
                     <div className="input-group-prepend">
