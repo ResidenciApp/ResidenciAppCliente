@@ -1,27 +1,24 @@
-.container {
+.container-search {
     background-color: #003e71;
+    color: #000 !important;
 }
-.firma-ara{
-    padding-bottom: 10px;
-    padding-top: 100px;
-}
-.acik-renk-form{
-    border-color: #003e71;
-    border-width:3px;
-    
-    
-}
+
 .card-body{
-    
     margin-left: 10px;
-   
 }
+
 .input-group-prepend{
     margin-left: 20px;
 }
-#gt{
-    
-    background-color: #59bd8b;
-    border-color:#59bd8b ;
-    color:#ffffff;
+
+
+
+.form-search-plan {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.background-form-search {
+    background: rgb(245, 245, 245);
 }
