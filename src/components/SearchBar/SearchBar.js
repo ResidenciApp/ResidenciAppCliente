@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import {withRouter} from 'react-router-dom';
 import axios from 'axios';
 
+import config from '../../config';
+
+import StudentHousingCard from '../Card/StudentHousingCard';
+
 import './SearchBar.css';
 
 export default class SearchBar extends Component{
@@ -15,7 +19,8 @@ export default class SearchBar extends Component{
             MinPrice: 0,
             MaxPrice: 0,
             includedServices: [],
-            name: ''
+            name: '',
+            residences: []
         }
 
 
@@ -23,8 +28,35 @@ export default class SearchBar extends Component{
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    async handleSubmit() {
-        
+    async handleSubmit(event) {
+        event.preventDefault();
+
+        var path = '/api/v1/student_housing/search';
+        var url = config.urlServer + path;
+
+        var {
+            city,
+            locality,
+            MinPrice,
+            MaxPrice,
+            includedServices,
+            name
+        } = this.state;
+
+        var body = {
+            city,
+            locality,
+            MinPrice,
+            MaxPrice,
+            includedServices,
+            name
+        }
+
+        var data = await axios.post(url, body);
+        console.log(data.data.data)
+        this.setState({
+            residences: data.data.data
+        })
     }
     
     handleChange(event) {
@@ -48,6 +80,7 @@ export default class SearchBar extends Component{
    
     render(){
         return(
+    <div className="SearchBar">
         <section class="search-banner text-white py-3 form-search-plan" id="search-banner">
             <div class="container container-search py-5 my-5"  >
                 <div class="row text-center pb-4">
@@ -179,6 +212,29 @@ export default class SearchBar extends Component{
             </div>
         </div>
         </section>
+
+        <div className="container">
+            <div className="row">
+                <div className="col-md-12">
+                    <div className="card">
+                        {
+                            this.state.residences.map((value, index) => {
+                                return <StudentHousingCard
+                                title={value.name}
+                                img={value.photo}
+                                desc="Pequeña descripción de la Residencia"
+                                review="152 reviews"
+                                orders="154 orders"
+                                url={"/residencia/" + value.id}
+                                price={value.price}
+                                />
+                            })
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
         )
     }    
     
