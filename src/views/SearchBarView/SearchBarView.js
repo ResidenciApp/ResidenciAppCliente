@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import Navigation from '../../components/Navigation/Navigation';
 
 import Footer from '../../components/Footer/Footer';
-import NavigationBar from '../../components/NavigationBar/NavigationBar';
+import NavigationBar from '../../components/SearchBar/SearchBar';
 
 export default class LoginView extends Component {
   render() {
     return (
-      <div className="NavigationBarView">
+      <div className="SearchBarView">
         
         <Navigation />
 

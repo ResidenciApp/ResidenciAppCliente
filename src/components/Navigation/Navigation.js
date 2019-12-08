@@ -166,7 +166,7 @@ class Navigation extends Component {
 
       elements.push({
         name: 'Buscar Residencia',
-        path: '#',
+        path: '/buscar',
         icon: 'fas fa-search-location'
       });
 

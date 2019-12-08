@@ -10,7 +10,7 @@ import CheckInOwnerView from './views/CheckInOwnerView/CheckInOwnerView';
 import OwnerProfileView from "./views/OwnerProfileView/OwnerProfileView";
 import CreateStudentHousingView from './views/CreateStudentHousingView/CreateStudentHousingView';
 import ShowStudentHousingView from './views/CardView/ShowStudentHousingView'
-import NavigationBar from './views/NavigationBarView/NavigationBarView';
+import SearchBarView from './views/SearchBarView/SearchBarView';
 
 import NotFound404 from './components/NotFound404/NotFound404';
 
@@ -29,7 +29,7 @@ var CheckInOwnerViewPermission =  PermissionByRole(CheckInOwnerView, roles.ANY_U
 var CheckInViewPermission = PermissionByRole(CheckInView           , roles.ANY_USER);
 var LoginViewPermission = PermissionByRole(LoginView               , roles.ANY_USER);
 var OwnerProfileViewPermission = PermissionByRole(OwnerProfileView , roles.ANY_USER);
-var NavigationBarViewPermission = PermissionByRole(NavigationBar , roles.ANY_USER);
+var SearchBarViewPermission = PermissionByRole(SearchBarView , roles.ANY_USER);
 var ShowStudentHousingPermission = PermissionByRole(ShowStudentHousingView, roles.ANY_USER);
 
 // Solo puedo acceder a estos componente si el usuario tiene el role de 'Propietario'
@@ -46,6 +46,7 @@ const Application = () =>  (
         <Route exact path="/registrar-residencia" component={CreateSHViewPermission}/>
         <Route exact path="/perfil-propietario/:username" component={OwnerProfileViewPermission}/>
         <Route exact path="/residencia/:id" component={ShowStudentHousingPermission}/>
+        <Route exact path="/buscar" component={SearchBarViewPermission}/>
         <Route component={NotFound404} />
       </Switch>
     </React.Fragment>

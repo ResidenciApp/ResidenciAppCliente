@@ -1,14 +1,23 @@
+.container {
+    background-color: #003e71;
+}
 .firma-ara{
-    padding-bottom: 100px;
+    padding-bottom: 10px;
     padding-top: 100px;
 }
 .acik-renk-form{
     border-color: #003e71;
-    border-width:1px;
+    border-width:3px;
+    
+    
 }
 .card-body{
-    background-color:#ffffff;
+    
+    margin-left: 10px;
    
+}
+.input-group-prepend{
+    margin-left: 20px;
 }
 #gt{
     
