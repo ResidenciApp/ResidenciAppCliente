@@ -5,6 +5,46 @@ import axios from 'axios';
 import './SearchBar.css';
 
 export default class SearchBar extends Component{
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            city: '',
+            locality: '',
+            MinPrice: 0,
+            MaxPrice: 0,
+            includedServices: [],
+            name: ''
+        }
+
+
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    async handleSubmit() {
+        
+    }
+    
+    handleChange(event) {
+        if(event.target.type==='checkbox' && event.target.name==='includedServices') {
+          var arr = this.state.includedServices;
+          if(event.target.checked) {
+            arr.push(parseInt(event.target.value))
+          } else {
+            arr.splice(arr.indexOf(parseInt(event.target.value)), 1)
+          }
+    
+          this.setState({
+            includedServices: arr
+          })
+        } else {
+          this.setState({
+            [event.target.name]: event.target.value
+          });
+        }
+      }
    
     render(){
         return(
@@ -24,16 +64,25 @@ export default class SearchBar extends Component{
                                     <div class="col-md-6">
                                         <h4 class="text-black">Ciudad</h4>
                                         <div class="form-group ">
-                                            <select class="form-control" >
-                                                <option defaultValue="N">Elegir Ciudad...</option>
-                                                <option >Bogotá</option>
+                                            <select
+                                                class="form-control"
+                                                name="city"
+                                                onChange={this.handleChange}
+                                            >
+                                                <option defaultValue="0">Elegir Ciudad...</option>
+                                                <option value="1">Bogotá</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <h4 class="text-black">Localidad</h4>
                                         <div class="form-group">
-                                            <select id="locality" class="form-control" >
+                                            <select
+                                                id="locality"
+                                                name="locality"
+                                                class="form-control"
+                                                onChange={this.handleChange}
+                                            >
                                                 <option defaultValue="N">Elegir Localidad...</option>
                                                 <option value="15">Antonio Nariño</option>
                                                 <option value="12">Barrios Unidos</option>
@@ -73,6 +122,7 @@ export default class SearchBar extends Component{
                                                     aria-describedby="MinPrice"
                                                     placeholder="Mín."
                                                     name="MinPrice"
+                                                    onChange={this.handleChange}
                                                 />
                                             </div>
                                             <div class="col-md-4">
@@ -83,6 +133,7 @@ export default class SearchBar extends Component{
                                                     aria-describedby="MaxPrice"
                                                     placeholder="Máx."
                                                     name="MaxPrice"
+                                                    onChange={this.handleChange}
                                                 />
                                             </div>
                                     </div>
@@ -108,11 +159,17 @@ export default class SearchBar extends Component{
                         <div class="row">
                             <div class="col-md-9">
                                 <div class="form-group ">
-                                    <input type="text" class="form-control" placeholder="¿Tienes el nombre de la residencia que buscas? ¡Escríbelo aquí! (Opcional)"/>
+                                    <input
+                                        type="text"
+                                        name="name"
+                                        class="form-control"
+                                        placeholder="¿Tienes el nombre de la residencia que buscas? ¡Escríbelo aquí! (Opcional)"
+                                        onChange={this.handleChange}
+                                    />
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                <button type="button"  className="btn btn-residenciapp-green btn-lg btn-block">Buscar</button>
+                                <button onClick={this.handleSubmit} type="submit"  className="btn btn-residenciapp-green btn-lg btn-block">Buscar</button>
                             </div>
                         </div>
                         </div>
