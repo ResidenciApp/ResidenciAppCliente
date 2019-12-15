@@ -324,7 +324,7 @@ class CreateStudentHousing extends Component {
                       >
 
                       <option defaultValue="N">Elegir Ciudad...</option>
-                      <option value="15">Bogotá D.C.</option>
+                      <option value="Bogotá D.C.">Bogotá D.C.</option>
                     </select>
 
                     <div className="input-group-prepend">
@@ -349,26 +349,26 @@ class CreateStudentHousing extends Component {
                       >
 
                       <option defaultValue="N">Elegir Localidad...</option>
-                      <option value="15">Antonio Nariño</option>
-                      <option value="12">Barrios Unidos</option>
-                      <option value="07">Bosa</option>
-                      <option value="02">Chapinero</option>
-                      <option value="19">Ciudad Bolivar</option>
-                      <option value="10">Engativa</option>
-                      <option value="09">Fontibón</option>
-                      <option value="08">Kennedy</option>
-                      <option value="17">La Candelaria</option>
-                      <option value="14">Los Mártires</option>
-                      <option value="16">Puente Aranda</option>
-                      <option value="18">Rafael Uribe Uribe</option>
-                      <option value="04">San Cristobal</option>
-                      <option value="03">Santa Fe</option>
-                      <option value="11">Suba</option>
-                      <option value="20">Sumapaz</option>
-                      <option value="13">Teusaquillo</option>
-                      <option value="06">Tunjuelito</option>
-                      <option value="01">Usaquen</option>
-                      <option value="05">Usme</option>
+                      <option value="Antonio Nariño">Antonio Nariño</option>
+                      <option value="Barrios Unidos">Barrios Unidos</option>
+                      <option value="Bosa">Bosa</option>
+                      <option value="Chapinero">Chapinero</option>
+                      <option value="Ciudad Bolivar">Ciudad Bolivar</option>
+                      <option value="Engativa">Engativa</option>
+                      <option value="Fontibón">Fontibón</option>
+                      <option value="Kennedy">Kennedy</option>
+                      <option value="La Candelaria">La Candelaria</option>
+                      <option value="Los Mártires">Los Mártires</option>
+                      <option value="Puente Aranda">Puente Aranda</option>
+                      <option value="Rafael Uribe Uribe">Rafael Uribe Uribe</option>
+                      <option value="San Cristobal">San Cristobal</option>
+                      <option value="Santa Fe">Santa Fe</option>
+                      <option value="Suba">Suba</option>
+                      <option value="Sumapaz">Sumapaz</option>
+                      <option value="Teusaquillo">Teusaquillo</option>
+                      <option value="Tunjuelito">Tunjuelito</option>
+                      <option value="Usaquen">Usaquen</option>
+                      <option value="Usme">Usme</option>
                     </select>
 
                     <div className="input-group-prepend">
