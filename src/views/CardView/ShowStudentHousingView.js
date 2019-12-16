@@ -19,7 +19,7 @@ class ShowStudentHousingView extends Component {
             description: '',
             price: 0,
             img: '',
-            city: 'Bogotá D.C.',
+            city: '',
             address: ''
         }
     
@@ -46,7 +46,8 @@ class ShowStudentHousingView extends Component {
                 img: publication.photo,
                 services: publication.services,
                 description: publication.description,
-                address: publication.address
+                address: publication.location.address,
+                city: publication.location.city
             })
         }
 
