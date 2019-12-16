@@ -200,6 +200,12 @@ class Navigation extends Component {
       });
 
       elements.push({
+        name: 'Buscar Residencia',
+        path: '/buscar',
+        icon: 'fas fa-search-location'
+      });
+
+      elements.push({
         name: 'Iniciar Sesión',
         path: '/login',
         icon: 'fas fa-sign-in-alt'
